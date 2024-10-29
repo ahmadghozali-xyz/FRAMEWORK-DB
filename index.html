@@ -1,0 +1,84 @@
+<!DOCTYPE html> 
+<html lang="id"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Formulir Bansos</title> 
+    <style> 
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            padding: 20px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            max-width: 400px; 
+        } 
+        label { 
+            display: block; 
+            margin: 10px 0 5px; 
+        } 
+        input, select { 
+            width: 100%; 
+            padding: 8px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+        } 
+        button { 
+            padding: 10px; 
+            background-color: #28a745; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        } 
+        button:hover { 
+            background-color: #218838; 
+        } 
+    </style> 
+</head> 
+<body> 
+ 
+    <h2>Formulir Penerima Bansos</h2> 
+    <form id="registrationForm" action="index.php" method="post"> 
+        <label for="nik">NIK:</label> 
+        <input type="text" id="nik" name="nik" required> 
+ 
+        <label for="nama">Nama:</label> 
+        <input type="text" id="nama" name="nama" required> 
+ 
+        <label for="tempat_tanggal_lahir">Tempat, Tanggal Lahir:</label> 
+        <input type="text" id="tempat_tanggal_lahir" name="tempat_tanggal_lahir" placeholder="Contoh: Jakarta, 1 Januari 2000" required> 
+ 
+        <label for="jenis_kelamin">Jenis Kelamin:</label> 
+        <select id="jenis_kelamin" name="jenis_kelamin" required> 
+            <option value="laki-laki">Laki-laki</option> 
+            <option value="perempuan">Perempuan</option> 
+        </select> 
+ 
+        <label for="status">Status:</label> 
+        <select id="status" name="status" required> 
+            <option value="reguler">Nikah</option> 
+            <option value="kelas_khusus">Belum Menikah</option> 
+        </select> 
+ 
+        <button type="submit">Submit</button> 
+    </form> 
+
+    <?php
+    // Periksa apakah formulir sudah disubmit
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nik = $_POST["nik"];
+        $nama = $_POST["nama"];
+        $tempat_tanggal_lahir = $_POST["tempat_tanggal_lahir"];
+        $jenis_kelamin = $_POST["jenis_kelamin"];
+        $status = $_POST["status"];
+
+        // Simpan data ke database (gunakan fungsi tambahData() dari index.php)
+        if (tambahData($conn, $nik, $nama, $tempat_tanggal_lahir, $jenis_kelamin, $status)) {
+            echo "";
+        }
+    ?>
+
+</body> 
+</html>
